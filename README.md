@@ -12,8 +12,6 @@ for working against canned data.
 
 Let's say you have some code that uses launchpad in the use\_lp() function:
 
-    from launchpadlib.launchpad import Launchpad
-
     def use_lp(lp):
         print("Launchpad object is", repr(lp))
         repr(lp.bugs)
@@ -31,8 +29,11 @@ objects the same way you can iterate quickly.
     CachingProxy.set_repr_mode(CachingProxy.REPR_FAKE)
     # Record everything in memory but don't use it
     CachingProxy.set_cache_mode(CachingProxy.CACHE_KEEP)
-    # Create a real launchpad object
+
+    # Create a real launchpad object and wrap it in a proxy 
+    from launchpadlib.launchpad import Launchpad
     lp = CachingProxy(Launchpad.login_anonymously("testapp"))
+
     # Use launchpad object somehow
     print("USING REAL OBJECT")
     use_lp(lp)
@@ -43,14 +44,16 @@ classes in your code in any way:
     # Save the cache
     cache = CachingProxy.to_cache(lp)
 
-Now you can use a fake object created from the cache and call your functions
-again:
-
     # Create a dummy from the cache
     lp2 = CachingProxy.from_cache(cache)
 
+
+Now you can use a fake object created from the cache and call your functions
+again:
+
     # Switch to pure mode -- we're working on fake objects anyway
     CachingProxy.set_cache_mode(CachingProxy.CACHE_PURE)
+
     # Use the fake launchpad object in the same way as before
     print("USING FAKE OBJECT")
     use_lp(lp2)
