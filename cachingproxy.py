@@ -1,10 +1,9 @@
-"""
 # Copyright 2013 Canonical Ltd.
 # Written by:
 #   Zygmunt Krynicki <zygmunt.krynicki@canonical.com>
 #
 # See COPYING for license information (LGPLv3)
-"""
+
 from __future__ import print_function
 
 import json
