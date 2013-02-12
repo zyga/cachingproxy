@@ -148,8 +148,6 @@ class CachingProxy(object):
             try:
                 value = impl_func(obj)
             except Exception as exc:
-                import logging
-                logging.exception("wrapping boom")
                 return exc
             else:
                 return CachingProxy(value)
