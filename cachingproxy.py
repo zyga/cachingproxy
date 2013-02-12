@@ -306,6 +306,10 @@ class CachingProxy(object):
     def __iter__(self):
         pass
 
+    @specialmethod_nocache
+    def next(self):
+        pass
+
     @specialmethod
     def __reversed__(self):
         pass
